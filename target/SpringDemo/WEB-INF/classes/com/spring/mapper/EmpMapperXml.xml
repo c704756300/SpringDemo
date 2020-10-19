@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.EmpMapper">
+    <select id="findAll" resultType="com.spring.enity.Emp">
+        select EMP.*,PART.DEPTNAME from EMP left join PART on EMP.DEPTNO= PART.DEPTID order by EMP.ID ASC
+    </select>
+    <select id="checkEmpno" resultType="Integer">
+        select count(*)from EMP where EMPNO like '%${empno}%'
+    </select>
+    <select id="findById" resultType="com.spring.enity.Emp">
+        select * from emp where id = #{id}
+    </select>
+    <insert id="addEmp">
+        insert into emp(empno,ename,hiredate,job,sal,deptno) VALUES(#{empno},#{ename},to_date(#{hiredate,jdbcType=DATE},'yyyy-mm-dd'),#{job},#{sal},#{deptno})
+    </insert>
+    <delete id="deleteEmp" parameterType="int">
+        delete from emp where id = #{id}
+    </delete>
+    <update id="updateEmp">
+        update emp set empno=#{empno},job=#{job},sal=#{sal},deptno=#{deptno} where id=#{id}
+    </update>
+
+    <delete id="deleteByIds" parameterType="list">
+        delete from emp where id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
+

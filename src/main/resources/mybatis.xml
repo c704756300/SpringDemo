@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 使用log4j2打印查询语句 -->
+    <settings>
+        <setting name="logImpl" value="LOG4J2" />
+    </settings>
+    <plugins>
+        <!-- 拦截器配置 -->
+        <plugin interceptor="com.spring.util.SqlCostInterceptor" />
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--pageInfo合理化分页参数-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+</configuration>

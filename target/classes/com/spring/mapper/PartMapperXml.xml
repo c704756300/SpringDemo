@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.mapper.PartMapper">
+    <select id="findAllPart" resultType="com.spring.enity.Part">
+        select * from part
+    </select>
+    <select id="findById" resultType="com.spring.enity.Part">
+        select * from part where deptid = #{deptid}
+    </select>
+    <insert id="addPart">
+        insert into part(deptid,partnme) VALUES(#{deptid},#{partnme})
+    </insert>
+    <delete id="deletePartEmp" parameterType="int">
+        delete from part where deptid = #{deptid}
+    </delete>
+    <update id="updatePart">
+        update part set partnme=#{partnme} where deptid=#{deptid}
+    </update>
+</mapper>
